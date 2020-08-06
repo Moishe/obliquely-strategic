@@ -55,6 +55,7 @@
 		.date {
 			font-style: italic;
 			font-weight: lighter;
+			margin-top: 30px;
 		}
 
 		.meal {
@@ -74,15 +75,19 @@
 			text-align: center;
 			font-size: smaller;
 		}
+
+		.consideration {
+			margin-top: 30px;
+		}
 	</style></head>
 <body>
 	<div class='heading'>A Lettvin/Meltzer Joint</div>
-	<div class='title wrapper'>
+	<div class='title wrapper' id='navigation'>
 		<div class='main-item centered'>
 			<a href='#greatmeals' id='gm'>Great Meals of History</a>
 		</div>
 		<div class='main-item centered'>
-			<a href='#obliquelystrategic' id='os'>Oblique Strategies</a>
+			<a href='#obliquestrategy' id='os'>Oblique Strategies</a>
 		</div>
 	</div>
 	<div class='content-top wrapper'>
@@ -97,32 +102,50 @@
 		randomElement = function(arr) {
 			return arr[Math.floor(Math.random() * arr.length)];
 		}
-		$(function() {
-			$('#os').click(function(e){
-				e.preventDefault();
 
-				$('#greatmeals').hide("fast");
-				$('#strategy').show("fast");
+		function showAGreatMeal() {
+			$('#greatmeals').show("fast");
 
-				$('#strategy').html(function() {
-					var idx = Math.floor(Math.random() * strategies.length);
-					return `<div class='consideration'>Have you considered</div>` +
-						`<div class='strategy'>${strategies[idx]}</div>`;
-				})
-			});
-			$('#gm').click(function(e){
-				e.preventDefault();
-
-				$('#strategy').hide("fast");
-				$('#greatmeals').show("fast");
-
-				$('#greatmeals').html(function() {
-					var idx = Math.floor(Math.random() * meals.length);
-					return `<div class='date'>${dates[idx]}</div>` +
-						`<div class='scenario'>${meal_scenarios[idx]}</div>` +
-						`<div class='meal'>${meals[idx]}</div>`;
-				})
+			$('#greatmeals').html(function() {
+				var idx = Math.floor(Math.random() * meals.length);
+				return `<div class='date'>${dates[idx]}</div>` +
+					`<div class='scenario'>${meal_scenarios[idx]}</div>` +
+					`<div class='meal'>${meals[idx]}</div>`;
 			})
+		}
+
+		function showAnObliqueStrategy() {
+			$('#strategy').show("fast");
+
+			$('#strategy').html(function() {
+				var idx = Math.floor(Math.random() * strategies.length);
+				return `<div class='consideration'>Have you considered</div>` +
+					`<div class='strategy'>${strategies[idx]}</div>`;
+			})
+		}
+
+		function showNavForHash(hash) {
+			$('#greatmeals').hide("fast", function() {
+				$('#strategy').hide("fast", function() {
+					if (hash == '#greatmeals') {
+						$('#navigation').hide();
+						showAGreatMeal();
+					} else if (hash == '#obliquestrategy') {
+						$('#navigation').hide();
+						showAnObliqueStrategy();
+					} else {
+						$('#navigation').show();
+					}
+				});
+			});
+		}
+
+		$(function() {
+			showNavForHash(window.location.hash);
+			$(window).bind( 'hashchange', function(e) { 
+				var hash = event.currentTarget.location.hash;
+				showNavForHash(hash);
+			});
 		});
 	</script>
 </body>

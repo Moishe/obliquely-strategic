@@ -32,6 +32,25 @@
 	<script type='text/javascript' src='still_lifes.js'></script>
 
 	<style>
+		body, html {
+			height: 100%;
+			margin: 0;
+		}
+
+		div {
+			display: block;
+		}
+
+		.bg-img {
+			background-image: url('images/two_hundred-01.jpg');
+			height: 100%;
+			position: relative;
+			opacity: 0.65;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
 		.content-top {
 			width: 500px;
 			margin: auto;
@@ -42,6 +61,7 @@
 
 		.title {
 			width: 100%;
+			padding-top: 50px;
 		}
 
 		.wrapper {
@@ -49,7 +69,6 @@
 		}
 
 		.main-item {
-			margin-top: 20px;
 			margin-bottom: 20px;
 		}
 
@@ -60,11 +79,11 @@
 		.date {
 			font-style: italic;
 			font-weight: lighter;
-			margin-top: 30px;
+			padding-top: 50px;
 		}
 
 		.meal {
-			margin-top: 30px;
+			padding-top: 50px;
 			line-height: 150%;
 		}
 
@@ -73,10 +92,7 @@
 		}
 
 		.strategy {
-			margin-top: 30px;
-		}
-
-		.credit-container {
+			padding-top: 50px;
 		}
 
 		.credit {
@@ -89,7 +105,7 @@
 		}
 
 		.consideration {
-			margin-top: 30px;
+			padding-top: 50px;
 		}
 
 		.strategy_links  {
@@ -101,24 +117,26 @@
 		}
 	</style></head>
 <body>
-	<div class='title wrapper' id='navigation'>
-		<div class='main-item centered'>
-			<a href='#greatmeals' id='gm'>Great Meals of History</a>
+	<div class="bg-img">
+		<div class='title wrapper' id='navigation'>
+			<div class='main-item centered'>
+				<a href='#greatmeals' id='gm'>Great Meals of History</a>
+			</div>
+			<div class='main-item centered'>
+				<a href='#obliquestrategy-1' id='os'>Oblique Strategies</a>
+			</div>
 		</div>
-		<div class='main-item centered'>
-			<a href='#obliquestrategy-1' id='os'>Oblique Strategies</a>
+		<div class='content-top wrapper'>
+			<div id='strategy' style='display:none' class='content centered'>
+				Strategy
+			</div>
+			<div id='greatmeals' style='display:none' class='content centered'>
+				Great Meals
+			</div>
 		</div>
-	</div>
-	<div class='content-top wrapper'>
-		<div id='strategy' style='display:none' class='content centered'>
-			Strategy
+		<div class='credit-container'>
+			<div class='credit'>A Lettvin/Meltzer Joint</div>
 		</div>
-		<div id='greatmeals' style='display:none' class='content centered'>
-			Great Meals
-		</div>
-	</div>
-	<div class='credit-container'>
-		<div class='credit'>A Lettvin/Meltzer Joint</div>
 	</div>
 	<script type='text/javascript'>
 		randomElement = function(arr) {

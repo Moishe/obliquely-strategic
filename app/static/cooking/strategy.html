@@ -151,7 +151,7 @@
 		}
 
 		function showAGreatMeal() {
-			$('#greatmeals').show("fast");
+			$('#greatmeals').fadeIn("fast");
 
 			$('#greatmeals').html(function() {
 				var idx = Math.floor(Math.random() * meals.length);
@@ -162,7 +162,7 @@
 		}
 
 		function showAnObliqueStrategy(hash) {
-			$('#strategy').show("fast");
+			$('#strategy').fadeIn("fast");
 
 			var idx = Math.floor(Math.random() * strategies.length);
 			var still_life = randomElement(still_lifes);
@@ -179,16 +179,18 @@
 		}
 
 		function showNavForHash(hash) {
-			$('#greatmeals').hide("fast", function() {
-				$('#strategy').hide("fast", function() {
+			$('#greatmeals').fadeOut("fast", function() {
+				$('#strategy').fadeOut("fast", function() {
 					if (hash == '#greatmeals') {
-						$('#navigation').hide();
-						showAGreatMeal();
+						$('#navigation').fadeOut("fast", function() {
+							showAGreatMeal();
+						});
 					} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
-						$('#navigation').hide();
-						showAnObliqueStrategy(hash);
+						$('#navigation').fadeOut("fast", function() {
+							showAnObliqueStrategy(hash);
+						});
 					} else {
-						$('#navigation').show();
+						$('#navigation').fadeIn();
 					}
 				});
 			});

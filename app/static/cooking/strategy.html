@@ -117,7 +117,7 @@
 		}
 	</style></head>
 <body>
-	<div class="bg-img">
+	<div class="bg-img" id="bg-img">
 		<div class='title wrapper' id='navigation'>
 			<div class='main-item centered'>
 				<a href='#greatmeals' id='gm'>Great Meals of History</a>
@@ -128,12 +128,19 @@
 		</div>
 		<div class='content-top wrapper'>
 			<div id='strategy' style='display:none' class='content centered'>
-				Strategy
+				<div class='consideration'>
+					Have you considered
+				</div>
+				<div id='strategy-text' class='strategy'></div>
+				<div class='strategy_links'>
+					<a id='strategy-yes' class='strategy_link' href=''>Yes</a>
+					<a id='strategy-no' class='strategy_link' href=''>No</a>
+				</div>
 			</div>
 			<div id='greatmeals' style='display:none' class='content centered'>
 				Great Meals
 			</div>
-		</div>
+		</div>	
 		<div class='credit-container'>
 			<div class='credit'>A Lettvin/Meltzer Joint</div>
 		</div>
@@ -157,21 +164,18 @@
 		function showAnObliqueStrategy(hash) {
 			$('#strategy').show("fast");
 
-			$('#strategy').html(function() {
-				var idx = Math.floor(Math.random() * strategies.length);
-				var still_life = randomElement(still_lifes);
-				if (hash == '#obliquestrategy-1') {
-					hash = '#obliquestrategy-2';
-				} else  {
-					hash = '#obliquestrategy-1';
-				}
-				return `<div class='consideration'>Have you considered</div>` +
-					`<div class='strategy'>${strategies[idx]}</div>` +
-					`<div class='strategy_links'>` +
-					`<a class='strategy_link' href='${hash}'>Yes</a>` +
-					`<a class='strategy_link' href='${still_life}'>No</a>` +
-					`</div>`;
-			})
+			var idx = Math.floor(Math.random() * strategies.length);
+			var still_life = randomElement(still_lifes);
+			if (hash == '#obliquestrategy-1') {
+				hash = '#obliquestrategy-2';
+			} else  {
+				hash = '#obliquestrategy-1';
+			}
+
+			$('#strategy-text').html(strategies[idx]);
+
+			$('#strategy-yes').attr('href', hash);
+			$('#strategy-no').attr('href', still_life);
 		}
 
 		function showNavForHash(hash) {
@@ -195,6 +199,9 @@
 			$(window).bind( 'hashchange', function(e) { 
 				var hash = event.currentTarget.location.hash;
 				showNavForHash(hash);
+			});
+			$('#strategy-no').click(function() {
+				$('#bg-img').fadeOut("slow");
 			});
 		});
 	</script>

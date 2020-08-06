@@ -29,6 +29,7 @@
 	<script type='text/javascript' src='dates.js'></script>
 	<script type='text/javascript' src='meal_scenarios.js'></script>
 	<script type='text/javascript' src='strategies.js'></script>
+	<script type='text/javascript' src='still_lifes.js'></script>
 
 	<style>
 		.content {
@@ -71,23 +72,37 @@
 			margin-top: 30px;
 		}
 
-		.heading {
+		.credit-container {
+		}
+
+		.credit {
+			position: absolute;
+			width: 100%;
+			bottom: 0;
 			text-align: center;
-			font-size: smaller;
+			font-size: small;
+			margin-bottom: 30px;
 		}
 
 		.consideration {
 			margin-top: 30px;
 		}
+
+		.strategy_links  {
+			margin: 30px;
+		}
+
+		.strategy_link {
+			margin: 30px;
+		}
 	</style></head>
 <body>
-	<div class='heading'>A Lettvin/Meltzer Joint</div>
 	<div class='title wrapper' id='navigation'>
 		<div class='main-item centered'>
 			<a href='#greatmeals' id='gm'>Great Meals of History</a>
 		</div>
 		<div class='main-item centered'>
-			<a href='#obliquestrategy' id='os'>Oblique Strategies</a>
+			<a href='#obliquestrategy-1' id='os'>Oblique Strategies</a>
 		</div>
 	</div>
 	<div class='content-top wrapper'>
@@ -97,6 +112,9 @@
 		<div id='greatmeals' style='display:none' class='content centered'>
 			Great Meals
 		</div>
+	</div>
+	<div class='credit-container'>
+		<div class='credit'>A Lettvin/Meltzer Joint</div>
 	</div>
 	<script type='text/javascript'>
 		randomElement = function(arr) {
@@ -114,13 +132,23 @@
 			})
 		}
 
-		function showAnObliqueStrategy() {
+		function showAnObliqueStrategy(hash) {
 			$('#strategy').show("fast");
 
 			$('#strategy').html(function() {
 				var idx = Math.floor(Math.random() * strategies.length);
+				var still_life = randomElement(still_lifes);
+				if (hash == '#obliquestrategy-1') {
+					hash = '#obliquestrategy-2';
+				} else  {
+					hash = '#obliquestrategy-1';
+				}
 				return `<div class='consideration'>Have you considered</div>` +
-					`<div class='strategy'>${strategies[idx]}</div>`;
+					`<div class='strategy'>${strategies[idx]}</div>` +
+					`<div class='strategy_links'>` +
+					`<a class='strategy_link' href='${hash}'>Yes</a>` +
+					`<a class='strategy_link' href='${still_life}'>No</a>` +
+					`</div>`;
 			})
 		}
 
@@ -130,9 +158,9 @@
 					if (hash == '#greatmeals') {
 						$('#navigation').hide();
 						showAGreatMeal();
-					} else if (hash == '#obliquestrategy') {
+					} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
 						$('#navigation').hide();
-						showAnObliqueStrategy();
+						showAnObliqueStrategy(hash);
 					} else {
 						$('#navigation').show();
 					}

@@ -24,6 +24,10 @@
 	<meta property="og:description" content="Creative tools for delicious food." />
 	<meta property="og:image" content="" />
 
+	<!-- Font Embed Code -->
+	<link rel="stylesheet" href="https://use.typekit.net/joo4cvz.css">
+
+	<!-- Data -->
 	<script type='text/javascript' src='jquery-3.5.1.min.js'></script>
 	<script type='text/javascript' src='meals.js'></script>
 	<script type='text/javascript' src='dates.js'></script>
@@ -32,23 +36,55 @@
 	<script type='text/javascript' src='still_lifes.js'></script>
 
 	<style>
+		a:link {
+		text-decoration: none;
+		}
+
+		a:visited {
+		text-decoration: none;
+		}
+
+		a:hover {
+		text-decoration: underline;
+		}
+
+		a:active {
+		text-decoration: underline;
+		}
+
 		body, html {
 			height: 100%;
 			margin: 0;
+			font-family: futura-pt, sans-serif;
+			font-weight: 400;
+			font-style: normal;
+			font-size: large;
 		}
 
 		div {
 			display: block;
+			padding-top: 30px;
 		}
 
 		.bg-img {
 			background-image: url('images/two_hundred-01.jpg');
 			height: 100%;
 			position: relative;
-			opacity: 0.65;
+			opacity: 0.25;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
+			z-index: 0;
+		}
+
+		.overlap-container {
+			opacity: 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			z-index: 1;
+			padding-top: 0px;
 		}
 
 		.content-top {
@@ -62,10 +98,6 @@
 		.title {
 			width: 100%;
 			padding-top: 50px;
-		}
-
-		.wrapper {
-			display: block;
 		}
 
 		.main-item {
@@ -88,6 +120,7 @@
 		}
 
 		.scenario {
+			padding-top: 50px;
 			line-height: 150%;
 		}
 
@@ -109,7 +142,7 @@
 		}
 
 		.strategy_links  {
-			margin: 30px;
+			padding-top: 50px;
 		}
 
 		.strategy_link {
@@ -118,7 +151,9 @@
 	</style></head>
 <body>
 	<div class="bg-img" id="bg-img">
-		<div class='title wrapper' id='navigation'>
+	</div>
+	<div class="overlap-container">
+		<div class='title wrapper' id='navigation' style='display:none'>
 			<div class='main-item centered'>
 				<a href='#greatmeals' id='gm'>Great Meals of History</a>
 			</div>
@@ -140,18 +175,25 @@
 			<div id='greatmeals' style='display:none' class='content centered'>
 				Great Meals
 			</div>
-		</div>	
-		<div class='credit-container'>
-			<div class='credit'>A Lettvin/Meltzer Joint</div>
 		</div>
+	</div>
+	<div class='credit-container'>
+		<div class='credit'>A Lettvin/Meltzer Joint</div>
 	</div>
 	<script type='text/javascript'>
 		randomElement = function(arr) {
 			return arr[Math.floor(Math.random() * arr.length)];
 		}
 
+		function randomBackground() {
+			var idx = Math.floor(Math.random() * 59).toString();
+			idx = idx.padStart(2, '0');
+			$('#bg-img').css('background-image', `url(images/two_hundred-${idx}.jpg)`);
+		}
+
 		function showAGreatMeal() {
-			$('#greatmeals').fadeIn("fast");
+			randomBackground();
+			$('#greatmeals').fadeIn("fast");						
 
 			$('#greatmeals').html(function() {
 				var idx = Math.floor(Math.random() * meals.length);
@@ -162,6 +204,7 @@
 		}
 
 		function showAnObliqueStrategy(hash) {
+			randomBackground();
 			$('#strategy').fadeIn("fast");
 
 			var idx = Math.floor(Math.random() * strategies.length);

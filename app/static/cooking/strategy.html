@@ -270,15 +270,11 @@
 
 		function showNavForHash(hash) {
 			randomBackground();
-			$('content').each(function() {
-				fadeOut("fast");
+			$('.content').each(function(idx) {
+				$(this).fadeOut("fast");
 			});
 
-			for (var i = 0; i < 60; i++) {
-				$('<img/>')[0].src = imageUrlFromIdx(i);
-			}
-
-			$('content').promise().done(function() {
+			$('.content').promise().done(function() {
 				if (hash == '#greatmeals' || hash == '#easteregg') {
 					$('#navigation').fadeOut("fast", function() {
 						showAGreatMeal(hash);
@@ -298,6 +294,10 @@
 		}
 
 		$(function() {
+			for (var i = 0; i < 60; i++) {
+				$('<img/>')[0].src = imageUrlFromIdx(i);
+			}
+
 			showNavForHash(window.location.hash);
 			$(window).bind( 'hashchange', function(e) { 
 				var hash = event.currentTarget.location.hash;

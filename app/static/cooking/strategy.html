@@ -12,6 +12,10 @@
 	<link rel="shortcut icon" href="/images/favicon.png">
 	<title>Obliquely Strategic Cooking</title>
 	<meta name="description" content="Creative tools for delicious food.">
+	<meta name="copyright" content="(c) Lettvin Meltzer 2014-2020">
+
+	<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+	<meta name="dcterms.rightsHolder" content="Lettvin Meltzer">
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
@@ -75,6 +79,7 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			z-index: 0;
+			padding-top: 0px;
 		}
 
 		.overlap-container {
@@ -148,17 +153,20 @@
 		.strategy_link {
 			margin: 30px;
 		}
+
+		.credit-container {
+			padding-top: 0px;
+		}
 	</style></head>
 <body>
-	<div class="bg-img" id="bg-img">
-	</div>
+	<div class="bg-img" id="bg-img"></div>
 	<div class="overlap-container">
 		<div class='title wrapper' id='navigation' style='display:none'>
 			<div class='main-item centered'>
 				<a href='#greatmeals' id='gm'>Great Meals of History</a>
 			</div>
 			<div class='main-item centered'>
-				<a href='#obliquestrategy-1' id='os'>Have you considered...</a>
+				<a href='#obliquestrategy-1' id='os'>Have You Considered ...</a>
 			</div>
 		</div>
 		<div class='content-top wrapper'>
@@ -195,15 +203,23 @@
 		<div class='credit'>a Lettvin & Meltzer joint</div>
 	</div>
 	<script type='text/javascript'>
+		var currentBackground = 0;
+
 		randomElement = function(arr) {
 			return arr[Math.floor(Math.random() * arr.length)];
 		}
 
+		function imageUrlFromIdx(idx) {
+			idx = idx.toString().padStart(2, '0');
+			return `images/two_hundred-${idx}.jpg`;			
+		}
+
 		function randomBackground() {
+			var idx = Math.floor(Math.random() * 59);
+
+			var imageUrl = imageUrlFromIdx(idx);
 			$('#bg-img').fadeOut("fast", function() {
-				var idx = Math.floor(Math.random() * 59).toString();
-				idx = idx.padStart(2, '0');
-				$('#bg-img').css('background-image', `url(images/two_hundred-${idx}.jpg)`);
+				$('#bg-img').css('background-image', `url(${imageUrl})`);
 				$('#bg-img').fadeIn("fast");
 			});
 		}
@@ -258,6 +274,10 @@
 				fadeOut("fast");
 			});
 
+			for (var i = 0; i < 60; i++) {
+				$('<img/>')[0].src = imageUrlFromIdx(i);
+			}
+
 			$('content').promise().done(function() {
 				if (hash == '#greatmeals' || hash == '#easteregg') {
 					$('#navigation').fadeOut("fast", function() {
@@ -283,12 +303,15 @@
 				var hash = event.currentTarget.location.hash;
 				showNavForHash(hash);
 			});
+
+			// pre-cache all the images
+
 			$('#strategy-no').click(function() {
 				$('#bg-img').fadeOut("slow");
 			});
 			$('#greatmeals').click(function() {
 				randomBackground();
-				$('#greatmeals').fadeOut("slow").promise().done(function() {
+				$('#greatmeals').fadeOut("fast").promise().done(function() {
 					showAGreatMeal('#greatmeals');
 				});
 			})

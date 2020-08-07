@@ -1,5 +1,5 @@
 var meal_scenarios = [
-    "Eli Terry takes a long walk through Northbury, Connecticut, naps, invents a clock that can discern the difference between apparent solar time and mean solar time (ephemeris time was not yet clear until 150 years later and so would not have been helpful in this clock), and enjoys a treat.",
+    "Dinner on the occasion of Kate's 33rd birthday, where each guest was honored and toasted, and the menu was letterpressed printed in the Stern type. Seattle, WA.",    "Eli Terry takes a long walk through Northbury, Connecticut, naps, invents a clock that can discern the difference between apparent solar time and mean solar time (ephemeris time was not yet clear until 150 years later and so would not have been helpful in this clock), and enjoys a treat.",
     "Buffet lunch, as enjoyed by Paul Morphy, during the third and most acrimonious day at the American Chess Organization's First American Chess Congress.",
     "Supper immediately following First Lt. James Burton Pond's successful defense of Fort Blair against the two-column guerrilla force of William Clarke Quantrill's Raiders. Baxter Springs, Kansas.",
     "Items from the bar menu in an unnamed Wrigelyville dinner purchased by “Billy Goat” Sianis after he bought a seat for his goat for Game 4 of the World Series, was forcibly escorted out, whereupon he cast a goat curse on the Chicago Cubs, which is rumored to last through the present.",
@@ -13,8 +13,7 @@ var meal_scenarios = [
     "When Mom had to work late, Father took the opportunity to make all of the orange food that was available. Seattle, WA.",
     "Snacks shortly after experimenting with marijuana for the first time. Lake City, WA.",
     "Mid-morning coffee with Emmanouíl Phokás and Ioánnis Phokás before the latter set out on his journey across the high seas in search of the Northwest Passage for the Spanish Crown. Cefalonia, Greece.",
-    "Supper at Walter de Maria's The Lightning Field, on the occasion of Eric's 35th birthday and, generally, a complicated and barely understood desire to be a part of something big. Unknown parts of New Mexico.",
-    "Dinner on the occasion of Kate's 33rd birthday, where each guest was honored and toasted, and the menu was letterpressed printed in the Stern type. Seattle, WA.",
+    "Supper at Walter de Maria's The Lightning Field, on the occasion of Eric's 35th birthday and, generally, a complicated and barely understood desire to be a part of something big. Unknown parts of New Mexico.",    
     "Cocktail hour immediately following the first and almost successful attempt at making sushi rice with the appropriate ingredients in the traditional manner. Portland, OR.",
     "Late lunch on the pier in Old Orchard Beach, ME, after spending the good part of a day hunting for tourmaline gemstones in the Bennett Quarry in Oxford County.",
     "Street treat immediately following the uplifting experience of discovering the Hall of Geology, Gems, and Minerals, with its sharp edges and irrational colorings, which itself followed the bizarre and discomforting regularity of the passionless stone known as the Hope Diamond. Washington, DC.",

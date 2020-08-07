@@ -191,12 +191,28 @@
 			$('#bg-img').css('background-image', `url(images/two_hundred-${idx}.jpg)`);
 		}
 
-		function showAGreatMeal() {
+		function showAGreatMeal(hash) {
 			randomBackground();
+
+			var idx = Math.floor(Math.random() * meals.length);
+			console.log(hash);
+			if (hash == '#easteregg') {
+				idx = 0;
+			}
+
+			console.log(idx);
+
+			if (idx == 0) {
+				// let's do something special
+				$('body').css('font-family', 'stern-pro, sans-serif');
+			} else {
+				$('body').css('font-family', 'futura-pt, sans-serif');
+			}
+
 			$('#greatmeals').fadeIn("fast");						
 
 			$('#greatmeals').html(function() {
-				var idx = Math.floor(Math.random() * meals.length);
+				console.log(idx);
 				return `<div class='date'>${dates[idx]}</div>` +
 					`<div class='scenario'>${meal_scenarios[idx]}</div>` +
 					`<div class='meal'>${meals[idx]}</div>`;
@@ -205,9 +221,11 @@
 
 		function showAnObliqueStrategy(hash) {
 			randomBackground();
-			$('#strategy').fadeIn("fast");
 
 			var idx = Math.floor(Math.random() * strategies.length);
+
+			$('#strategy').fadeIn("fast");
+
 			var still_life = randomElement(still_lifes);
 			if (hash == '#obliquestrategy-1') {
 				hash = '#obliquestrategy-2';
@@ -224,9 +242,9 @@
 		function showNavForHash(hash) {
 			$('#greatmeals').fadeOut("fast", function() {
 				$('#strategy').fadeOut("fast", function() {
-					if (hash == '#greatmeals') {
+					if (hash == '#greatmeals' || hash == '#easteregg') {
 						$('#navigation').fadeOut("fast", function() {
-							showAGreatMeal();
+							showAGreatMeal(hash);
 						});
 					} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
 						$('#navigation').fadeOut("fast", function() {

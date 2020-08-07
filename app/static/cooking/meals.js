@@ -1,5 +1,5 @@
 var meals = [
-    "Good bread, raw milk butter, pape clément vin de bordeaux",
+    "Chanterelle Farrotto, Canard Roti aux Olives, Salad de Radicchio a l'Orange, Trois Fromages, Deux Diables Brun, Croque en Bouche, Mes Amis sans eux je n'ai rien",    "Good bread, raw milk butter, pape clément vin de bordeaux",
     "Skirt steak with bearnaise and pomme frites, Beaujolais, fromage du chevre, Cote de Rhone",
     "Clambake over fire, Riesling, pork chops, Domaine Leroy burgundy ",
     "Margaritas, tagliatelle with tomato sauce, Chianti classico ",
@@ -14,7 +14,6 @@ var meals = [
     "Dill pickles and ten black olives",
     "Peaches in syrup, shrimp, eels, pickled herring, tuna boiled in saltwater",
     "Red chile enchiladas with cheese and beans, sparkling water, one bottle of mid-range tequila, some limes, incredible--absolutely lights out--flan",
-    "Chanterelle Farrotto, Canard Roti aux Olives, Salad de Radicchio a l'Orange, Trois Fromages, Deux Diables Brun, Croque en Bouche, Mes Amis sans eux je n'ai rien",
     "Lychees, clementines, olives, almonds, feta cheese",
     "Foot long hot dog, 12 oz Coke.",
     "Lemon ice in a plastic cup, wood spoon. ",

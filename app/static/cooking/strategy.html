@@ -175,10 +175,24 @@
 			<div id='greatmeals' style='display:none' class='content centered'>
 				Great Meals
 			</div>
+			<div id='notes' style='display:none' class='content centered notes'>
+				<p>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</p>
+				<p>Obliquely Strategic Cooking is also a series of small poems with larger images. </p>
+				<p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</p>
+				<p>Obliquely Strategic Cooking had a queer and prententious description of itself in iTunes Store. We would edit it considerably were we to create it again for touchscreen-based cellular and mobile-computing devices, which we would not do, so instead it can sit here like a page in a notebook found in a stranger’s old wooden dresser, next to some out of style sweaters.</p>
+				<div class='subnotes'>
+					<p>Obliquely Strategic Cooking is the Joy of Cooking with ... Rube Goldberg.</p>
+					<p>Part inspirational tool, part absurdist art, part unreliable diary, part speculative rune, and part valuable meal planner, Obliquely Strategic Cooking motivates you to put down your iPhone and start cooking something (or at least think about what you might cook next time you start cooking something or may suggest to someone you know next time the subject arises).</p>
+					<p>In Have you considered, you will engage with essential challenges (literally or hermeneutically, as you wish) to inspire you and help you figure out what to cook for friends, family, lovers, or strangers. Developed for those who enjoy building something out of nothing, Have you considered substitutes the constriction of the recipe for a sea of flow.</p>
+					<p>In Great Meals of History, you will pull inspiration from some of the greatest meals of the last four hundred years, some of which may have happened. Connecting perception and experience to explore the role and vitality of personal histories in gastronomy, Great Meals of History pushes you toward building new memories."</p>
+				</div>>
+				<p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </p>
+			</div>
 		</div>
 	</div>
 	<div class='credit-container'>
-		<div class='credit'>A Lettvin & Meltzer joint</div>
+		<!-- <div class='credit'><a href='#notes'>Notes</a></div> -->
+		<div class='credit'>a Lettvin & Meltzer joint</div>
 	</div>
 	<script type='text/javascript'>
 		randomElement = function(arr) {
@@ -186,21 +200,19 @@
 		}
 
 		function randomBackground() {
-			var idx = Math.floor(Math.random() * 59).toString();
-			idx = idx.padStart(2, '0');
-			$('#bg-img').css('background-image', `url(images/two_hundred-${idx}.jpg)`);
+			$('#bg-img').fadeOut("fast", function() {
+				var idx = Math.floor(Math.random() * 59).toString();
+				idx = idx.padStart(2, '0');
+				$('#bg-img').css('background-image', `url(images/two_hundred-${idx}.jpg)`);
+				$('#bg-img').fadeIn("fast");
+			});
 		}
 
 		function showAGreatMeal(hash) {
-			randomBackground();
-
 			var idx = Math.floor(Math.random() * meals.length);
-			console.log(hash);
 			if (hash == '#easteregg') {
 				idx = 0;
 			}
-
-			console.log(idx);
 
 			if (idx == 0) {
 				// let's do something special
@@ -209,19 +221,16 @@
 				$('body').css('font-family', 'futura-pt, sans-serif');
 			}
 
-			$('#greatmeals').fadeIn("fast");						
-
 			$('#greatmeals').html(function() {
-				console.log(idx);
 				return `<div class='date'>${dates[idx]}</div>` +
 					`<div class='scenario'>${meal_scenarios[idx]}</div>` +
 					`<div class='meal'>${meals[idx]}</div>`;
-			})
+			});
+
+			$('#greatmeals').fadeIn("fast");
 		}
 
 		function showAnObliqueStrategy(hash) {
-			randomBackground();
-
 			var idx = Math.floor(Math.random() * strategies.length);
 
 			$('#strategy').fadeIn("fast");
@@ -239,21 +248,32 @@
 			$('#strategy-no').attr('href', still_life);
 		}
 
+		function showTheNotes() {
+			$('#notes').fadeIn("fast");
+		}
+
 		function showNavForHash(hash) {
-			$('#greatmeals').fadeOut("fast", function() {
-				$('#strategy').fadeOut("fast", function() {
-					if (hash == '#greatmeals' || hash == '#easteregg') {
-						$('#navigation').fadeOut("fast", function() {
-							showAGreatMeal(hash);
-						});
-					} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
-						$('#navigation').fadeOut("fast", function() {
-							showAnObliqueStrategy(hash);
-						});
-					} else {
-						$('#navigation').fadeIn();
-					}
-				});
+			randomBackground();
+			$('content').each(function() {
+				fadeOut("fast");
+			});
+
+			$('content').promise().done(function() {
+				if (hash == '#greatmeals' || hash == '#easteregg') {
+					$('#navigation').fadeOut("fast", function() {
+						showAGreatMeal(hash);
+					});
+				} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
+					$('#navigation').fadeOut("fast", function() {
+						showAnObliqueStrategy(hash);
+					});
+				} else if (hash == '#notes') {
+					$('#navigation').fadeOut("fast", function() {
+						showTheNotes();
+					})
+				} else {
+					$('#navigation').fadeIn();
+				}
 			});
 		}
 
@@ -266,6 +286,12 @@
 			$('#strategy-no').click(function() {
 				$('#bg-img').fadeOut("slow");
 			});
+			$('#greatmeals').click(function() {
+				randomBackground();
+				$('#greatmeals').fadeOut("slow").promise().done(function() {
+					showAGreatMeal('#greatmeals');
+				});
+			})
 		});
 	</script>
 </body>

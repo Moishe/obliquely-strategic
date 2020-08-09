@@ -290,10 +290,8 @@
 		function showTheNotes(notePage) {
 			$('#notes').fadeOut("fast", function() {
 				$('[id^=notes-]').each(function(idx) {
-					console.log("fading in " + $(this).attr('id'));
 					$(this).hide();
 				}).promise().done(function() {
-					console.log("fading in " + `#notes-${notePage}`);
 					$(`#notes-${notePage}`).show();
 					$('#notes').fadeIn("fast");
 				});

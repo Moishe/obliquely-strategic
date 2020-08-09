@@ -226,29 +226,73 @@
 		</div>
 	</div>
 	<script type='text/javascript'>
-		var currentBackground = 0;
-
-		randomElement = function(arr) {
-			return arr[Math.floor(Math.random() * arr.length)];
+		/**
+		 * Shuffles array in place. ES6 version
+		 * @param {Array} a items An array containing the items.
+		 */
+		function shuffle(a) {
+			for (let i = a.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[a[i], a[j]] = [a[j], a[i]];
+			}
+			return a;
 		}
+
+		let ItemChooser = class {
+			constructor(elementCount) {
+				this.elementCount = elementCount;
+				this.selections = [];
+				for (var i = 0; i < elementCount; i++) {
+					this.selections[i] = i;
+				}
+				shuffle(this.selections);
+
+				this.index = 0;
+			}
+
+			get next() {
+				if (this.index < this.elementCount) {
+					return this.selections[this.index++];
+				} else {
+					this.index = 1;
+					shuffle(this.selections);
+					return this.selections[0];
+				}
+			}
+
+			get peek() {
+				return this.selections[this.index];
+			}
+		}
+
+		var backgroundIndexPicker = new ItemChooser(59);
+		var mealPicker = new ItemChooser(meals.length);
+		var strategyPicker = new ItemChooser(strategies.length);
 
 		function imageUrlFromIdx(idx) {
 			idx = idx.toString().padStart(2, '0');
 			return `images/two_hundred-${idx}.jpg`;			
 		}
 
+		randomElement = function(arr) {
+			return arr[Math.floor(Math.random() * arr.length)];
+		}
+
 		function randomBackground() {
-			var idx = Math.floor(Math.random() * 59);
+			var idx = backgroundIndexPicker.next + 1;
 
 			var imageUrl = imageUrlFromIdx(idx);
 			$('#bg-img').fadeOut("fast", function() {
 				$('#bg-img').css('background-image', `url(${imageUrl})`);
 				$('#bg-img').fadeIn("fast");
 			});
+
+			nextBackground = backgroundIndexPicker.peek + 1;
+			$('<img/>')[0].src = imageUrlFromIdx(nextBackground);
 		}
 
 		function showAGreatMeal(hash) {
-			var idx = Math.floor(Math.random() * meals.length);
+			var idx = mealPicker.next;
 			if (hash == '#easteregg') {
 				idx = 0;
 			}
@@ -270,7 +314,7 @@
 		}
 
 		function showAnObliqueStrategy(hash) {
-			var idx = Math.floor(Math.random() * strategies.length);
+			var idx = strategyPicker.next;
 
 			$('#strategy').fadeIn("fast");
 
@@ -342,14 +386,6 @@
 		}
 
 		$(function() {
-			// This probably isn't good practice, but I should do
-			// some kind of optimization here.
-			/*
-			for (var i = 0; i < 60; i++) {
-				$('<img/>')[0].src = imageUrlFromIdx(i);
-			}
-			*/
-
 			showNavForHash(window.location.hash);
 			$(window).bind( 'hashchange', function(e) { 
 				var hash = event.currentTarget.location.hash;
@@ -366,6 +402,7 @@
 					showAGreatMeal('#greatmeals');
 				});
 			})
+
 		});
 	</script>
 </body>

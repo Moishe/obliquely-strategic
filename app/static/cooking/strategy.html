@@ -367,36 +367,16 @@
 					$('#notes').fadeIn("fast");
 				});
 			});
-/*
-			if (notePage == 1) {
-				$('#prevnotes').css('visibility', 'hidden');
-			} else {
-				$('#prevnotes').css('visibility', 'visible');
-			}
-
-			if (notePage == 6) {
-				$('#nextnotes').css('visibility', 'hidden');
-			} else {
-				$('#nextnotes').css('visibility', 'visible');
-			}
-*/
 
 			$('[id^=notenav-]').each(function(idx) {
 				if ($(this).attr('id') == `notenav-${notePage}`) {
-					console.log("Hiding: " + $(this).attr('id'));
 					$(`#notedummy-${idx + 1}`).show();
 					$(this).hide();
 				} else {
-					console.log("Showing: " + $(this).attr('id'));
 					$(`#notedummy-${idx + 1}`).hide();
 					$(this).show();
 				}
 			});
-
-			var nextPage = parseInt(notePage) + 1;
-			var prevPage = parseInt(notePage) - 1;
-			$('#prevnotes').attr('href', `#notes-${prevPage}`);
-			$('#nextnotes').attr('href', `#notes-${nextPage}`);
 		}
 
 		function showNavForHash(hash) {

@@ -51,12 +51,10 @@
 		}
 
 		a:hover {
-			text-decoration: none;
 			color: darkslateblue;
 		}
 
 		a:active {
-			text-decoration: none;
 			color: darkslateblue;
 		}
 
@@ -109,10 +107,6 @@
 			padding-top: 50px;
 		}
 
-		.main-item {
-			margin-bottom: 20px;
-		}
-
 		.centered {
 			text-align: center;
 		}
@@ -138,7 +132,7 @@
 		}
 
 		.credit {
-			position: absolute;
+			/* position: absolute; */
 			width: 100%;
 			bottom: 0;
 			text-align: center;
@@ -170,19 +164,27 @@
 		.note_page {
 			height: 300px;
 		}
+
+		.notesnav {
+			padding-top: 0px;
+		}
+
+		.wrapper  {
+			min-height: 500px;
+		}
 	</style></head>
 <body>
 	<div class="bg-img" id="bg-img"></div>
 	<div class="overlap-container">
-		<div class='title wrapper' id='navigation' style='display:none'>
-			<div class='main-item centered'>
-				<a href='#greatmeals' id='gm'>Great Meals of History</a>
-			</div>
-			<div class='main-item centered'>
-				<a href='#obliquestrategy-1' id='os'>Have You Considered ...</a>
-			</div>
-		</div>
 		<div class='content-top wrapper'>
+			<div class='content centered' id='navigation' style='display:none'>
+				<div class='main-item centered'>
+					<a href='#greatmeals' id='gm'>Great Meals of History</a>
+				</div>
+				<div class='main-item centered'>
+					<a href='#obliquestrategy-1' id='os'>Have You Considered ...</a>
+				</div>
+			</div>
 			<div id='strategy' style='display:none' class='content centered'>
 				<div class='consideration'>
 					Have you considered
@@ -197,6 +199,11 @@
 				Great Meals
 			</div>
 			<div id='notes' style='display:none' class='content centered notes'>
+				<div id="notesnav">
+					<a id='prevnotes' href=''>&lt;</a>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id='nextnotes' href=''>&gt;</a>
+				</div>
 				<div id="notes-1" class='note_page' style='display:none'>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</div>
 				<div id="notes-2" class='note_page' style='display:none'></p>Obliquely Strategic Cooking is also a series of small poems with larger images. </div>
 				<div id="notes-3" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</div>
@@ -208,15 +215,8 @@
 					<p>In Great Meals of History, you will pull inspiration from some of the greatest meals of the last four hundred years, some of which may have happened. Connecting perception and experience to explore the role and vitality of personal histories in gastronomy, Great Meals of History pushes you toward building new memories."</p>
 				</div>
 				<div id="notes-6" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </div>
-				<div id="notesnav">
-					<a id='prevnotes' href=''>&lt;</a>
-					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
-					<a id='nextnotes' href=''>&gt;</a>
-				</div>
 			</div>
 		</div>
-	</div>
-	<div class='credit-container'>
 		<div class='credit'>
 			<p>
 				<a href=''>Home</a>
@@ -358,6 +358,7 @@
 
 			$('#strategy-no').click(function() {
 				$('#bg-img').fadeOut("slow");
+				$('.overlap-container').fadeOut("slow");
 			});
 			$('#greatmeals').click(function() {
 				randomBackground();

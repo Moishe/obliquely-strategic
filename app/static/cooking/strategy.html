@@ -208,7 +208,7 @@
 					<p>In Great Meals of History, you will pull inspiration from some of the greatest meals of the last four hundred years, some of which may have happened. Connecting perception and experience to explore the role and vitality of personal histories in gastronomy, Great Meals of History pushes you toward building new memories."</p>
 				</div>
 				<div id="notes-6" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </div>
-				<div>
+				<div id="notesnav">
 					<a id='prevnotes' href=''>&lt;</a>
 					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
 					<a id='nextnotes' href=''>&gt;</a>
@@ -288,13 +288,15 @@
 		}
 
 		function showTheNotes(notePage) {
-			console.log(`Showing notes ${notePage}`);
-			$('#notes').fadeIn("fast");
-
-			$('[id^=notes-]').each(function(idx) {
-				$(this).fadeOut("fast");
-			}).promise().done(function() {
-				$(`#notes-${notePage}`).fadeIn("fast");
+			$('#notes').fadeOut("fast", function() {
+				$('[id^=notes-]').each(function(idx) {
+					console.log("fading in " + $(this).attr('id'));
+					$(this).hide();
+				}).promise().done(function() {
+					console.log("fading in " + `#notes-${notePage}`);
+					$(`#notes-${notePage}`).show();
+					$('#notes').fadeIn("fast");
+				});
 			});
 
 			if (notePage == 1) {

@@ -41,19 +41,23 @@
 
 	<style>
 		a:link {
-		text-decoration: none;
+			text-decoration: none;
+			color: darkslategray;
 		}
 
 		a:visited {
-		text-decoration: none;
+			text-decoration: none;
+			color: darkslategray;
 		}
 
 		a:hover {
-		text-decoration: underline;
+			text-decoration: none;
+			color: darkslateblue;
 		}
 
 		a:active {
-		text-decoration: underline;
+			text-decoration: none;
+			color: darkslateblue;
 		}
 
 		body, html {
@@ -157,6 +161,15 @@
 		.credit-container {
 			padding-top: 0px;
 		}
+
+		.notes {
+			overflow-y: auto;
+			max-height: 750px;
+		}
+
+		.note_page {
+			height: 300px;
+		}
 	</style></head>
 <body>
 	<div class="bg-img" id="bg-img"></div>
@@ -184,23 +197,33 @@
 				Great Meals
 			</div>
 			<div id='notes' style='display:none' class='content centered notes'>
-				<p>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</p>
-				<p>Obliquely Strategic Cooking is also a series of small poems with larger images. </p>
-				<p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</p>
-				<p>Obliquely Strategic Cooking had a queer and prententious description of itself in iTunes Store. We would edit it considerably were we to create it again for touchscreen-based cellular and mobile-computing devices, which we would not do, so instead it can sit here like a page in a notebook found in a stranger’s old wooden dresser, next to some out of style sweaters.</p>
-				<div class='subnotes'>
+				<div id="notes-1" class='note_page' style='display:none'>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</div>
+				<div id="notes-2" class='note_page' style='display:none'></p>Obliquely Strategic Cooking is also a series of small poems with larger images. </div>
+				<div id="notes-3" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</div>
+				<div id="notes-4" class='note_page' style='display:none'></p>Obliquely Strategic Cooking had a queer and prententious description of itself in iTunes Store. We would edit it considerably were we to create it again for touchscreen-based cellular and mobile-computing devices, which we would not do, so instead it can sit here like a page in a notebook found in a stranger’s old wooden dresser, next to some out of style sweaters.</div>
+				<div class='subnotes note-page' id="notes-5" style="display:none; font-size:small">
 					<p>Obliquely Strategic Cooking is the Joy of Cooking with ... Rube Goldberg.</p>
 					<p>Part inspirational tool, part absurdist art, part unreliable diary, part speculative rune, and part valuable meal planner, Obliquely Strategic Cooking motivates you to put down your iPhone and start cooking something (or at least think about what you might cook next time you start cooking something or may suggest to someone you know next time the subject arises).</p>
 					<p>In Have you considered, you will engage with essential challenges (literally or hermeneutically, as you wish) to inspire you and help you figure out what to cook for friends, family, lovers, or strangers. Developed for those who enjoy building something out of nothing, Have you considered substitutes the constriction of the recipe for a sea of flow.</p>
 					<p>In Great Meals of History, you will pull inspiration from some of the greatest meals of the last four hundred years, some of which may have happened. Connecting perception and experience to explore the role and vitality of personal histories in gastronomy, Great Meals of History pushes you toward building new memories."</p>
-				</div>>
-				<p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </p>
+				</div>
+				<div id="notes-6" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </div>
+				<div>
+					<a id='prevnotes' href=''>&lt;</a>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id='nextnotes' href=''>&gt;</a>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class='credit-container'>
-		<!-- <div class='credit'><a href='#notes'>Notes</a></div> -->
-		<div class='credit'>a Lettvin & Meltzer joint</div>
+		<div class='credit'>
+			<p>
+				<a href=''>Home</a>
+				<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+				<a href='#notes-1'>Notes</a></p>
+			<p>a Lettvin & Meltzer joint</p>
+		</div>
 	</div>
 	<script type='text/javascript'>
 		var currentBackground = 0;
@@ -264,8 +287,32 @@
 			$('#strategy-no').attr('href', still_life);
 		}
 
-		function showTheNotes() {
+		function showTheNotes(notePage) {
+			console.log(`Showing notes ${notePage}`);
 			$('#notes').fadeIn("fast");
+
+			$('[id^=notes-]').each(function(idx) {
+				$(this).fadeOut("fast");
+			}).promise().done(function() {
+				$(`#notes-${notePage}`).fadeIn("fast");
+			});
+
+			if (notePage == 1) {
+				$('#prevnotes').css('visibility', 'hidden');
+			} else {
+				$('#prevnotes').css('visibility', 'visible');
+			}
+
+			if (notePage == 6) {
+				$('#nextnotes').css('visibility', 'hidden');
+			} else {
+				$('#nextnotes').css('visibility', 'visible');
+			}
+
+			var nextPage = parseInt(notePage) + 1;
+			var prevPage = parseInt(notePage) - 1;
+			$('#prevnotes').attr('href', `#notes-${prevPage}`);
+			$('#nextnotes').attr('href', `#notes-${nextPage}`);
 		}
 
 		function showNavForHash(hash) {
@@ -283,10 +330,11 @@
 					$('#navigation').fadeOut("fast", function() {
 						showAnObliqueStrategy(hash);
 					});
-				} else if (hash == '#notes') {
+				} else if (hash.startsWith('#notes-')) {
 					$('#navigation').fadeOut("fast", function() {
-						showTheNotes();
-					})
+						var notePage = hash.substr(7,1); // This only supports 9 pages of notes, sorry.
+						showTheNotes(notePage);
+					});
 				} else {
 					$('#navigation').fadeIn();
 				}
@@ -294,17 +342,19 @@
 		}
 
 		$(function() {
+			// This probably isn't good practice, but I should do
+			// some kind of optimization here.
+			/*
 			for (var i = 0; i < 60; i++) {
 				$('<img/>')[0].src = imageUrlFromIdx(i);
 			}
+			*/
 
 			showNavForHash(window.location.hash);
 			$(window).bind( 'hashchange', function(e) { 
 				var hash = event.currentTarget.location.hash;
 				showNavForHash(hash);
 			});
-
-			// pre-cache all the images
 
 			$('#strategy-no').click(function() {
 				$('#bg-img').fadeOut("slow");

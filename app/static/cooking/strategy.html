@@ -168,8 +168,15 @@
 			padding-top: 0px;
 		}
 
-		.wrapper  {
+		.wrapper {
 			min-height: 500px;
+		}
+
+		.notedummy {
+			opacity: 0.3;
+			color: blue;
+			text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
+			text-align:center;
 		}
 	</style></head>
 <body>
@@ -199,15 +206,36 @@
 			</div>
 			<div id='notes' style='display:none' class='content centered notes'>
 				<div id="notesnav">
-					<a id='prevnotes' href=''>&lt;</a>
+					<div style='display: none'>
+						<a id='prevnotes' href=''>&lt;</a>
+						<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+						<a id='nextnotes' href=''>&gt;</a>
+					</div>
+					<!-- I mean, probably create these in a loop -->
+					<a id="notenav-1" href='#notes-1'>1</a>
+					<span class="notedummy" id="notedummy-1">1</span>
 					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
-					<a id='nextnotes' href=''>&gt;</a>
+					<a id="notenav-2" href='#notes-2'>2</a>
+					<span class="notedummy" id="notedummy-2">2</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-3" href='#notes-3'>3</a>
+					<span class="notedummy" id="notedummy-3">3</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-4" href='#notes-4'>4</a>
+					<span class="notedummy" id="notedummy-4">4</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-5" href='#notes-5'>5</a>
+					<span class="notedummy" id="notedummy-5">5</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-6" href='#notes-6'>6</a>
+					<span class="notedummy" id="notedummy-6">6</span>
 				</div>
 				<div id="notes-1" class='note_page' style='display:none'>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</div>
 				<div id="notes-2" class='note_page' style='display:none'></p>Obliquely Strategic Cooking is also a series of small poems with larger images. </div>
 				<div id="notes-3" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</div>
 				<div id="notes-4" class='note_page' style='display:none'></p>Obliquely Strategic Cooking had a queer and prententious description of itself in iTunes Store. We would edit it considerably were we to create it again for touchscreen-based cellular and mobile-computing devices, which we would not do, so instead it can sit here like a page in a notebook found in a stranger’s old wooden dresser, next to some out of style sweaters.</div>
 				<div class='subnotes note-page' id="notes-5" style="display:none; font-size:small">
+					<div style='font-size: large;'>It read:</div>
 					<p>Obliquely Strategic Cooking is the Joy of Cooking with ... Rube Goldberg.</p>
 					<p>Part inspirational tool, part absurdist art, part unreliable diary, part speculative rune, and part valuable meal planner, Obliquely Strategic Cooking motivates you to put down your iPhone and start cooking something (or at least think about what you might cook next time you start cooking something or may suggest to someone you know next time the subject arises).</p>
 					<p>In Have you considered, you will engage with essential challenges (literally or hermeneutically, as you wish) to inspire you and help you figure out what to cook for friends, family, lovers, or strangers. Developed for those who enjoy building something out of nothing, Have you considered substitutes the constriction of the recipe for a sea of flow.</p>
@@ -339,7 +367,7 @@
 					$('#notes').fadeIn("fast");
 				});
 			});
-
+/*
 			if (notePage == 1) {
 				$('#prevnotes').css('visibility', 'hidden');
 			} else {
@@ -351,6 +379,19 @@
 			} else {
 				$('#nextnotes').css('visibility', 'visible');
 			}
+*/
+
+			$('[id^=notenav-]').each(function(idx) {
+				if ($(this).attr('id') == `notenav-${notePage}`) {
+					console.log("Hiding: " + $(this).attr('id'));
+					$(`#notedummy-${idx + 1}`).show();
+					$(this).hide();
+				} else {
+					console.log("Showing: " + $(this).attr('id'));
+					$(`#notedummy-${idx + 1}`).hide();
+					$(this).show();
+				}
+			});
 
 			var nextPage = parseInt(notePage) + 1;
 			var prevPage = parseInt(notePage) - 1;

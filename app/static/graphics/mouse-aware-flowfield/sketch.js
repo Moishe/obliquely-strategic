@@ -145,7 +145,8 @@ function update_flow_field() {
     
     let normal_x = screen_x - width / 2
     let normal_y = screen_y - height / 2
-    let direction = (Math.floor(direction * 1000000) % Math.floor(Math.PI * 1000000)) / 1000000 + millis() / 100
+    let direction = 0 //sin(sqrt(normal_x * normal_x + normal_y * normal_y) / 300) * PI * 2
+    //direction += (Math.floor(direction * 1000000) % Math.floor(Math.PI * 1000000)) / 1000000 + millis() / 100
     
     grid[i] = lerp(direction, angle_between, influence)
   }    

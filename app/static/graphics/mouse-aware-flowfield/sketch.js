@@ -52,22 +52,6 @@ function screen_xy_to_grid_direction(x, y) {
   }
 }
 
-function init_flow_field() {
-  for (var i = 0; i < field_width * field_height; i++) {
-    grid.push(0)
-  }
-
-  for (var x = 0; x < field_width; x++) {
-    for (var y = 0; y < field_height; y++) {
-      let normal_x = (x / field_width) - 0.5
-      let normal_y = (y / field_height) - 0.5
-      let direction = sin(sqrt(normal_x * normal_x + normal_y * normal_y) * 3) * PI * 2
-      direction = direction + noise(x,y) - 0.5
-      set_grid(x, y, direction)
-    }
-  }
-}
-
 function create_sparkle(x, y, speed, intensity, direction, life) {
   s = {
     x: x,
@@ -106,7 +90,7 @@ function setup() {
     }
   }
   
-  init_flow_field()
+  update_flow_field()
       
   first_free = 999
   background(0)
@@ -161,10 +145,9 @@ function update_flow_field() {
     
     let normal_x = screen_x - width / 2
     let normal_y = screen_y - height / 2
-    let direction = sin(sqrt(normal_x * normal_x + normal_y * normal_y) / 300) * PI * 2
-    direction += millis() / 100
+    let direction = (Math.floor(direction * 1000000) % Math.floor(Math.PI * 1000000)) / 1000000 + millis() / 100
     
-    grid[i] = lerp(millis() / 1000, angle_between, influence)
+    grid[i] = lerp(direction, angle_between, influence)
   }    
 }
 

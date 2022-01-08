@@ -1,0 +1,425 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<link rel="stylesheet" href="site.css">
+
+	<!-- Page Info -->
+	<link rel="shortcut icon" href="/images/favicon.png">
+	<title>Obliquely Strategic Cooking</title>
+	<meta name="description" content="A cookbook application for the Web">
+	<meta name="copyright" content="(c) Lettvin Meltzer 2014-2020">
+
+	<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+	<meta name="dcterms.rightsHolder" content="Lettvin Meltzer">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Obliquely Strategic Cooking">
+	<meta name="twitter:description" content="A cookbook application for the Web.">
+	<meta name="twitter:image:src" content=""> 
+
+	<!-- Facebook OpenGraph -->
+	<meta property="og:title" content="Obliquely Strategic Cooking" />
+	<meta property="og:description" content="A cookbook application for the Web." />
+	<meta property="og:image" content="" />
+
+	<!-- Font Embed Code -->
+	<link rel="stylesheet" href="https://use.typekit.net/joo4cvz.css">
+
+	<!-- Data -->
+	<script type='text/javascript' src='static/cooking/jquery-3.5.1.min.js'></script>
+	<script type='text/javascript' src='static/cooking/meals.js'></script>
+	<script type='text/javascript' src='static/cooking/dates.js'></script>
+	<script type='text/javascript' src='static/cooking/meal_scenarios.js'></script>
+	<script type='text/javascript' src='static/cooking/strategies.js'></script>
+	<script type='text/javascript' src='static/cooking/still_lifes.js'></script>
+
+	<style>
+		a:link {
+			text-decoration: none;
+			color: darkslategray;
+		}
+
+		a:visited {
+			text-decoration: none;
+			color: darkslategray;
+		}
+
+		a:hover {
+			color: darkslateblue;
+		}
+
+		a:active {
+			color: darkslateblue;
+		}
+
+		body, html {
+			height: 100%;
+			margin: 0;
+			font-family: futura-pt, sans-serif;
+			font-weight: 400;
+			font-style: normal;
+			font-size: large;
+		}
+
+		div {
+			display: block;
+			padding-top: 30px;
+		}
+
+		.bg-img {
+			height: 100%;
+			position: relative;
+			opacity: 0.25;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			z-index: 0;
+			padding-top: 0px;
+		}
+
+		.overlap-container {
+			opacity: 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			z-index: 1;
+			padding-top: 0px;
+		}
+
+		.content-top {
+			width: 500px;
+			margin: auto;
+		}
+		.content {
+			width: 100%;
+		}
+
+		.title {
+			width: 100%;
+			padding-top: 50px;
+		}
+
+		.centered {
+			text-align: center;
+		}
+
+		.date {
+			font-style: italic;
+			font-weight: lighter;
+			padding-top: 50px;
+		}
+
+		.meal {
+			padding-top: 50px;
+			line-height: 150%;
+		}
+
+		.scenario {
+			padding-top: 50px;
+			line-height: 150%;
+		}
+
+		.strategy {
+			padding-top: 50px;
+		}
+
+		.credit {
+			/* position: absolute; */
+			width: 100%;
+			bottom: 0;
+			text-align: center;
+			font-size: small;
+			margin-bottom: 30px;
+		}
+
+		.consideration {
+			padding-top: 50px;
+		}
+
+		.strategy_links  {
+			padding-top: 50px;
+		}
+
+		.strategy_link {
+			margin: 30px;
+		}
+
+		.credit-container {
+			padding-top: 0px;
+		}
+
+		.notes {
+			overflow-y: auto;
+			max-height: 750px;
+		}
+
+		.note_page {
+			height: 300px;
+		}
+
+		.notesnav {
+			padding-top: 0px;
+		}
+
+		.wrapper {
+			min-height: 500px;
+		}
+
+		.notedummy {
+			opacity: 0.3;
+			color: blue;
+			text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
+			text-align:center;
+		}
+	</style></head>
+<body>
+	<div class="bg-img" id="bg-img"></div>
+	<div class="overlap-container">
+		<div class='content-top wrapper'>
+			<div class='content centered' id='navigation' style='display:none'>
+				<div class='main-item centered'>
+					<a href='#obliquestrategy-1' id='os'>Have You Considered ...</a>
+				</div>
+				<div class='main-item centered'>
+					<a href='#greatmeals' id='gm'>Great Meals of History</a>
+				</div>
+			</div>
+			<div id='strategy' style='display:none' class='content centered'>
+				<div class='consideration'>
+					Have you considered
+				</div>
+				<div id='strategy-text' class='strategy'></div>
+				<div class='strategy_links'>
+					<a id='strategy-yes' class='strategy_link' href=''>Yes</a>
+					<a id='strategy-no' class='strategy_link' href=''>No</a>
+				</div>
+			</div>
+			<div id='greatmeals' style='display:none' class='content centered'>
+				Great Meals
+			</div>
+			<div id='notes' style='display:none' class='content centered notes'>
+				<div id="notesnav">
+					<!-- I mean, probably create these in a loop -->
+					<a id="notenav-1" href='#notes-1'>1</a>
+					<span class="notedummy" id="notedummy-1">1</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-2" href='#notes-2'>2</a>
+					<span class="notedummy" id="notedummy-2">2</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-3" href='#notes-3'>3</a>
+					<span class="notedummy" id="notedummy-3">3</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-4" href='#notes-4'>4</a>
+					<span class="notedummy" id="notedummy-4">4</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-5" href='#notes-5'>5</a>
+					<span class="notedummy" id="notedummy-5">5</span>
+					<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+					<a id="notenav-6" href='#notes-6'>6</a>
+					<span class="notedummy" id="notedummy-6">6</span>
+				</div>
+				<div id="notes-1" class='note_page' style='display:none'>Obliquely Strategic Cooking is a World Wide Web application program stored on remote servers and delivered over the Internet through a browser interface to clients upon their request. Once a client requests interaction from our World Wide Web application program, the information contained in Obliquely Strategic Cooking should appear on the client’s display. Our hope is that this application program will be available to clients twenty-fours hours per day, seven days per week, but sometimes hope fails, and if that happens, we regret the inconvenience.</div>
+				<div id="notes-2" class='note_page' style='display:none'></p>Obliquely Strategic Cooking is also a series of small poems with larger images. </div>
+				<div id="notes-3" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was first developed as a mobile application on the iOS operating system and made available through what was then called the iTunes Store (and what is now called the App Store), a digital distribution platform for touchscreen-based cellular and mobile-computing devices. It was a pain in the ass to make in this way. We charged $1.99 for it and received roughly 56% percent of the revenue from each sale, pre-tax. That is not a good distribution deal no matter how many copies you intend to sell.</div>
+				<div id="notes-4" class='note_page' style='display:none'></p>Obliquely Strategic Cooking had a queer and prententious description of itself in iTunes Store. We would edit it considerably were we to create it again for touchscreen-based cellular and mobile-computing devices, which we would not do, so instead it can sit here like a page in a notebook found in a stranger’s old wooden dresser, next to some out of style sweaters.</div>
+				<div class='subnotes note-page' id="notes-5" style="display:none; font-size:small">
+					<div style='font-size: large;'>It read:</div>
+					<p>Obliquely Strategic Cooking is the Joy of Cooking with ... Rube Goldberg.</p>
+					<p>Part inspirational tool, part absurdist art, part unreliable diary, part speculative rune, and part valuable meal planner, Obliquely Strategic Cooking motivates you to put down your iPhone and start cooking something (or at least think about what you might cook next time you start cooking something or may suggest to someone you know next time the subject arises).</p>
+					<p>In Have you considered, you will engage with essential challenges (literally or hermeneutically, as you wish) to inspire you and help you figure out what to cook for friends, family, lovers, or strangers. Developed for those who enjoy building something out of nothing, Have you considered substitutes the constriction of the recipe for a sea of flow.</p>
+					<p>In Great Meals of History, you will pull inspiration from some of the greatest meals of the last four hundred years, some of which may have happened. Connecting perception and experience to explore the role and vitality of personal histories in gastronomy, Great Meals of History pushes you toward building new memories."</p>
+				</div>
+				<div id="notes-6" class='note_page' style='display:none'></p>Obliquely Strategic Cooking was created by Moishe Lettvin and Eric Meltzer in 2014 and unmodernized in 2020. It was inspired by Brian Eno and Peter Schmidt's Oblique Strategies, a card-based application “for” creativity, various trees, certain rocks, detective fiction, and the recurring quandary of what to eat. </div>
+			</div>
+		</div>
+		<div class='credit'>
+			<p>
+				<a href=''>Home</a>
+				<span style="opacity:0.2">&nbsp;|&nbsp;</span>
+				<a href='#notes-1'>Notes</a></p>
+			<p>a Lettvin & Meltzer joint</p>
+		</div>
+	</div>
+	<script type='text/javascript'>
+		/**
+		 * Shuffles array in place. ES6 version
+		 * @param {Array} a items An array containing the items.
+		 */
+		function shuffle(a) {
+			for (let i = a.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[a[i], a[j]] = [a[j], a[i]];
+			}
+			return a;
+		}
+
+		let ItemChooser = class {
+			constructor(elementCount) {
+				this.elementCount = elementCount;
+				this.selections = [];
+				for (var i = 0; i < elementCount; i++) {
+					this.selections[i] = i;
+				}
+				shuffle(this.selections);
+
+				this.index = 0;
+			}
+
+			get next() {
+				if (this.index < this.elementCount) {
+					return this.selections[this.index++];
+				} else {
+					this.index = 1;
+					shuffle(this.selections);
+					return this.selections[0];
+				}
+			}
+
+			get peek() {
+				return this.selections[this.index];
+			}
+		}
+
+		var backgroundIndexPicker = new ItemChooser(59);
+		var mealPicker = new ItemChooser(meals.length);
+		var strategyPicker = new ItemChooser(strategies.length);
+
+		function imageUrlFromIdx(idx) {
+			idx = idx.toString().padStart(2, '0');
+			return `static/cooking/images/two_hundred-${idx}.jpg`;			
+		}
+
+		randomElement = function(arr) {
+			return arr[Math.floor(Math.random() * arr.length)];
+		}
+
+		function randomBackground() {
+			var idx = backgroundIndexPicker.next + 1;
+
+			var imageUrl = imageUrlFromIdx(idx);
+			$('#bg-img').fadeOut("fast", function() {
+				$('#bg-img').css('background-image', `url(${imageUrl})`);
+				$('#bg-img').fadeIn("fast");
+			});
+
+			nextBackground = backgroundIndexPicker.peek + 1;
+			$('<img/>')[0].src = imageUrlFromIdx(nextBackground);
+		}
+
+		function showAGreatMeal(hash) {
+			var idx = mealPicker.next;
+			if (hash == '#easteregg') {
+				idx = 0;
+			}
+
+			if (idx == 0) {
+				// let's do something special
+				$('body').css('font-family', 'stern-pro, sans-serif');
+			} else {
+				$('body').css('font-family', 'futura-pt, sans-serif');
+			}
+
+			$('#greatmeals').html(function() {
+				return `<div class='date'>${dates[idx]}</div>` +
+					`<div class='scenario'>${meal_scenarios[idx]}</div>` +
+					`<div class='meal'>${meals[idx]}</div>`;
+			});
+
+			$('#greatmeals').fadeIn("fast");
+		}
+
+		function showAnObliqueStrategy(hash) {
+			var idx = strategyPicker.next;
+
+			$('#strategy').fadeIn("fast");
+
+			var still_life = randomElement(still_lifes);
+			if (hash == '#obliquestrategy-1') {
+				hash = '#obliquestrategy-2';
+			} else  {
+				hash = '#obliquestrategy-1';
+			}
+
+			$('#strategy-text').html(strategies[idx]);
+
+			$('#strategy-yes').attr('href', hash);
+			$('#strategy-no').attr('href', still_life);
+		}
+
+		function showTheNotes(notePage) {
+			$('#notes').fadeOut("fast", function() {
+				$('[id^=notes-]').each(function(idx) {
+					$(this).hide();
+				}).promise().done(function() {
+					$(`#notes-${notePage}`).show();
+					$('#notes').fadeIn("fast");
+				});
+			});
+
+			$('[id^=notenav-]').each(function(idx) {
+				if ($(this).attr('id') == `notenav-${notePage}`) {
+					$(`#notedummy-${idx + 1}`).show();
+					$(this).hide();
+				} else {
+					$(`#notedummy-${idx + 1}`).hide();
+					$(this).show();
+				}
+			});
+		}
+
+		function showNavForHash(hash) {
+			randomBackground();
+			$('.content').each(function(idx) {
+				$(this).fadeOut("fast");
+			});
+
+			$('.content').promise().done(function() {
+				if (hash == '#greatmeals' || hash == '#easteregg') {
+					$('#navigation').fadeOut("fast", function() {
+						showAGreatMeal(hash);
+					});
+				} else if (hash == '#obliquestrategy-1' || hash == '#obliquestrategy-2') {
+					$('#navigation').fadeOut("fast", function() {
+						showAnObliqueStrategy(hash);
+					});
+				} else if (hash.startsWith('#notes-')) {
+					$('#navigation').fadeOut("fast", function() {
+						var notePage = hash.substr(7,1); // This only supports 9 pages of notes, sorry.
+						showTheNotes(notePage);
+					});
+				} else {
+					$('#navigation').fadeIn();
+				}
+			});
+		}
+
+		$(function() {
+			showNavForHash(window.location.hash);
+			$(window).bind( 'hashchange', function(e) { 
+				var hash = event.currentTarget.location.hash;
+				showNavForHash(hash);
+			});
+
+			$('#strategy-no').click(function() {
+				$('#bg-img').fadeOut("slow");
+				$('.overlap-container').fadeOut("slow");
+			});
+			$('#greatmeals').click(function() {
+				randomBackground();
+				$('#greatmeals').fadeOut("fast").promise().done(function() {
+					showAGreatMeal('#greatmeals');
+				});
+			})
+
+		});
+	</script>
+</body>
+
+</html>

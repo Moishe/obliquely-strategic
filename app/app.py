@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_mapping(
@@ -16,8 +16,11 @@ try:
 except OSError:
     pass
 
-# a simple page that says hello
-@app.route('/hello')
-def hello():
-    return 'Hello, World.'
+@app.route('/graphics/<path:path>')
+def mouse_flowfield(path):
+    return render_template('mouse-flowfield.html')
+
+@app.route('/cooking')
+def cooking():
+    return render_template('strategy.html')
 
